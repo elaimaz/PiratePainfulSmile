@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour, IDamageble
 {
     //Move Variables
     private Rigidbody2D rb;
@@ -31,6 +31,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private GameObject rightCannon3 = null;
 
+    //Damage Varibles
+    [SerializeField]
+    private int health = 7;
+    [SerializeField]
+    private float damageRate = 1.5f;
+    private float lastDamageTime = 0;
+    
+    public bool canBeDamageble = true;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -46,6 +55,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetAxis("Fire2") > 0)
             TripleShoot();
+
+        if (Time.time > damageRate + lastDamageTime)
+            canBeDamageble = true;
+        else
+            canBeDamageble = false;
     }
 
     private void FixedUpdate()
@@ -75,5 +89,21 @@ public class PlayerMovement : MonoBehaviour
             Instantiate(rightCannonBall, rightCannon2.transform.position, transform.rotation);
             Instantiate(rightCannonBall, rightCannon3.transform.position, transform.rotation);
         }
+    }
+
+    public void Damage(int damageDone)
+    {
+        if (canBeDamageble == true)
+        {
+            lastDamageTime = Time.time;
+            health -= damageDone;
+            if (health < 1)
+                Death();
+        }
+    }
+
+    public void Death()
+    {
+        Destroy(gameObject);
     }
 }
