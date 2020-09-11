@@ -21,6 +21,7 @@ public class CannonBall : MonoBehaviour
     {
         if (collision.tag == "EnemyShip")
         {
+            collision.GetComponent<IDamageble>().Damage(1);
             Destroy(gameObject);
         }
     }

@@ -43,14 +43,6 @@ public class EnemyChaser : MonoBehaviour, IDamageble
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "CannonBall")
-        {
-            Damage(1);
-        }
-    }
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "Player")
