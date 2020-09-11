@@ -9,11 +9,19 @@ public class RightCannonBall : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Destroy(this.gameObject, 2f);
+        Destroy(gameObject, 2f);
     }
 
     private void FixedUpdate()
     {
         rb.AddForce(transform.up * speed, ForceMode2D.Impulse);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "EnemyShip")
+        {
+            Destroy(gameObject);
+        }
     }
 }
