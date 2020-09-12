@@ -14,7 +14,7 @@ public class EnemyShooter : MonoBehaviour, IDamageble
 
     //Attack
     [SerializeField]
-    private float ShootRate = 2.5f;
+    private float ShootRate = 3f;
     private float lastShoot = 0;
     [SerializeField]
     private GameObject enemyCannonBall = null;
@@ -28,6 +28,7 @@ public class EnemyShooter : MonoBehaviour, IDamageble
     {
         rb = GetComponent<Rigidbody2D>();
         playerPosition = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        lastShoot = Time.time;
     }
 
     private void Update()
@@ -46,6 +47,9 @@ public class EnemyShooter : MonoBehaviour, IDamageble
             lastShoot = Time.time;
             Shoot();
         }
+
+        if (distance > 25)
+            Destroy(gameObject);
     }
 
     private void FixedUpdate()

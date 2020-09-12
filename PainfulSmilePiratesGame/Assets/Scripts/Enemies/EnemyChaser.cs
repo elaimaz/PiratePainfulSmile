@@ -20,9 +20,12 @@ public class EnemyChaser : MonoBehaviour, IDamageble
 
     private void Update()
     {
-        direction = playerPosition.position - transform.position;
-        direction.Normalize();
-        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        if (playerPosition)
+        {
+            direction = playerPosition.position - transform.position;
+            direction.Normalize();
+            angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        }
     }
 
     private void FixedUpdate()
