@@ -12,10 +12,13 @@ public class EnemyChaser : MonoBehaviour, IDamageble
     [SerializeField]
     private int health = 2;
 
+    private GameManager gameManager;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerPosition = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     private void Update()
@@ -43,6 +46,7 @@ public class EnemyChaser : MonoBehaviour, IDamageble
 
     public void Death()
     {
+        gameManager.UpdateScore();
         Destroy(gameObject);
     }
 

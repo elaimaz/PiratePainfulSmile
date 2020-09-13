@@ -24,11 +24,14 @@ public class EnemyShooter : MonoBehaviour, IDamageble
     private Transform cannonL = null;
     public float distance;
 
+    private GameManager gameManager;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerPosition = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         lastShoot = Time.time;
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     private void Update()
@@ -72,6 +75,7 @@ public class EnemyShooter : MonoBehaviour, IDamageble
 
     public void Death()
     {
+        gameManager.UpdateScore();
         Destroy(gameObject);
     }
 }

@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
 
     private UIManager uIManager;
 
+    private int score = 0;
+
     private void Start()
     {
         playerPosition = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
@@ -91,6 +93,12 @@ public class GameManager : MonoBehaviour
             randomPosition = RandomShooterPosition();
 
         return randomPosition;
+    }
+
+    public void UpdateScore()
+    {
+        score++;
+        uIManager.UpdateScoreText(score);
     }
 
 }
