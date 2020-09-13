@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Dynamic;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class GameManager : MonoBehaviour
     private GameObject shooterShip = null;
     [SerializeField]
     private Transform playerPosition;
+    [SerializeField]
+    private LayerMask unspawnableArea;
 
     private void Start()
     {
@@ -27,7 +30,7 @@ public class GameManager : MonoBehaviour
             lastChaserSpawned = Time.time;
             if (playerPosition)
             {
-                Vector3 randomPosition = new Vector3(Random.Range(playerPosition.transform.position.x - 25, playerPosition.transform.position.x + 25), Random.Range(playerPosition.transform.position.y - 15, playerPosition.transform.position.y + 15), 0);
+                Vector3 randomPosition = new Vector3(Random.Range(playerPosition.transform.position.x - 15, playerPosition.transform.position.x + 15), Random.Range(playerPosition.transform.position.y - 10, playerPosition.transform.position.y + 10), 0);
                 if (randomPosition.x > playerPosition.transform.position.x - 9f || randomPosition.x < playerPosition.transform.position.x + 9f)
                     if (randomPosition.x >= playerPosition.transform.position.x)
                         randomPosition.x += 9f;
@@ -47,20 +50,29 @@ public class GameManager : MonoBehaviour
             lastShooterSpawned = Time.time;
             if (playerPosition)
             {
-                Vector3 randomPosition = new Vector3(Random.Range(playerPosition.transform.position.x - 8, playerPosition.transform.position.x + 8), Random.Range(playerPosition.transform.position.y - 4, playerPosition.transform.position.y + 4), 0);
-                if (randomPosition.x > playerPosition.transform.position.x - 3 || randomPosition.x < playerPosition.transform.position.x + 3)
-                    if (randomPosition.x >= playerPosition.transform.position.x)
-                        randomPosition.x += 2;
-                    else
-                        randomPosition.x -= 2;
-                if (randomPosition.y > playerPosition.transform.position.y - 2 || randomPosition.y < playerPosition.transform.position.y + 2)
-                    if (randomPosition.y >= playerPosition.transform.position.y)
-                        randomPosition.y += 1;
-                    else
-                        randomPosition.y -= 1;
-                Instantiate(shooterShip, randomPosition, Quaternion.identity);
+                Vector3 randomShooterPosition = RandomShooterPosition();
+                Instantiate(shooterShip, randomShooterPosition, Quaternion.identity);
             }
         }
+    }
+
+    private Vector3 RandomShooterPosition()
+    {
+        Vector3 randomPosition = new Vector3(Random.Range(playerPosition.transform.position.x - 8, playerPosition.transform.position.x + 8), Random.Range(playerPosition.transform.position.y - 4, playerPosition.transform.position.y + 4), 0);
+        if (randomPosition.x > playerPosition.transform.position.x - 3 || randomPosition.x < playerPosition.transform.position.x + 3)
+            if (randomPosition.x >= playerPosition.transform.position.x)
+                randomPosition.x += 2;
+            else
+                randomPosition.x -= 2;
+        if (randomPosition.y > playerPosition.transform.position.y - 2 || randomPosition.y < playerPosition.transform.position.y + 2)
+            if (randomPosition.y >= playerPosition.transform.position.y)
+                randomPosition.y += 1;
+            else
+                randomPosition.y -= 1;
+        if (Physics2D.OverlapCircle(randomPosition, 1, unspawnableArea) != null)
+            randomPosition = RandomShooterPosition();
+
+        return randomPosition;
     }
 
 }
