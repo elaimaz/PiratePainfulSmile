@@ -31,7 +31,7 @@ public class EnemyChaser : MonoBehaviour, IDamageble
     private void FixedUpdate()
     {
         rb.rotation = angle;
-        rb.AddForce(direction * speed);
+        //rb.AddForce(direction * speed);
     }
 
     public void Damage(int damageDone)
