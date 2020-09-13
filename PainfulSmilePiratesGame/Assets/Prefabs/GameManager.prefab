@@ -43,13 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c40838bc049035f40894dd81a569073d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaserSpawnTime: 3
+  chaserSpawnTime: 61
   chaserShip: {fileID: 9058020694183077770, guid: 1a9f955a2e0753940a799f82e1639b2b,
     type: 3}
-  shooterSpawnTime: 8
+  shooterSpawnTime: 61
   shooterShip: {fileID: 9062350671148764761, guid: 47c0291961a6c9e49a1fc8ca97794163,
     type: 3}
   playerPosition: {fileID: 0}
   unspawnableArea:
     serializedVersion: 2
     m_Bits: 256
+  duration: 3
