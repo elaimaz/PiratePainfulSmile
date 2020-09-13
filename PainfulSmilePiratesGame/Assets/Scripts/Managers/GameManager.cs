@@ -16,15 +16,33 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Transform playerPosition;
     [SerializeField]
-    private LayerMask unspawnableArea;
+    private LayerMask unspawnableArea = 0;
+
+    [SerializeField]
+    private int duration = 3;
+    private float time;
+
+    private UIManager uIManager;
 
     private void Start()
     {
         playerPosition = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        time = duration * 60;
+        uIManager = GameObject.FindGameObjectWithTag("UI").GetComponent<UIManager>();
     }
 
     private void Update()
     {
+        if (time > 0)
+        {
+            time -= Time.deltaTime;
+            uIManager.updateTimer(time);
+        }
+        else
+        {
+            Debug.Log("EndGame");
+        }
+
         if (Time.time > chaserSpawnTime + lastChaserSpawned)
         {
             lastChaserSpawned = Time.time;
