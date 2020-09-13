@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -8,6 +9,11 @@ public class UIManager : MonoBehaviour
     private Text timer = null;
     [SerializeField]
     private Text scoreText = null;
+
+    [SerializeField]
+    private GameObject blackPanel = null;
+    [SerializeField]
+    private Text finalScoreText = null;
 
     public void updateTimer(float time)
     {
@@ -19,5 +25,25 @@ public class UIManager : MonoBehaviour
     public void UpdateScoreText(int score)
     {
         scoreText.text = "Score: " + score.ToString();
+    }
+
+    public void EndScreen()
+    {
+        blackPanel.SetActive(true);
+    }
+
+    public void ShowFinalScore(int score)
+    {
+        finalScoreText.text = "Your Final Score Was: \n" + score;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void ReturnToMainMenu()
+    {
+        Debug.Log("Main Menu");
     }
 }

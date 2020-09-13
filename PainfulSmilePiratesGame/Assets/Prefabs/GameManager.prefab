@@ -53,4 +53,4 @@ MonoBehaviour:
   unspawnableArea:
     serializedVersion: 2
     m_Bits: 256
-  duration: 3
+  duration: 1

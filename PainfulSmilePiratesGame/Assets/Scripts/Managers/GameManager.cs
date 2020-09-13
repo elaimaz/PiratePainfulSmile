@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     private float lastShooterSpawned = 0;
     [SerializeField]
     private GameObject shooterShip = null;
+    private float sessionTime;
     [SerializeField]
     private Transform playerPosition;
     [SerializeField]
@@ -25,16 +26,20 @@ public class GameManager : MonoBehaviour
     private UIManager uIManager;
 
     private int score = 0;
+    private bool runGame = true;
 
     private void Start()
     {
         playerPosition = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         time = duration * 60;
         uIManager = GameObject.FindGameObjectWithTag("UI").GetComponent<UIManager>();
+        sessionTime = 0;
     }
 
     private void Update()
     {
+        sessionTime += Time.deltaTime;
+
         if (time > 0)
         {
             time -= Time.deltaTime;
@@ -42,12 +47,17 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("EndGame");
+            if (runGame == true)
+            {
+                runGame = false;
+                uIManager.EndScreen();
+                uIManager.ShowFinalScore(score);
+            }
         }
 
-        if (Time.time > chaserSpawnTime + lastChaserSpawned)
+        if (sessionTime > chaserSpawnTime + lastChaserSpawned)
         {
-            lastChaserSpawned = Time.time;
+            lastChaserSpawned = sessionTime;
             if (playerPosition)
             {
                 Vector3 randomPosition = new Vector3(Random.Range(playerPosition.transform.position.x - 15, playerPosition.transform.position.x + 15), Random.Range(playerPosition.transform.position.y - 10, playerPosition.transform.position.y + 10), 0);
@@ -65,9 +75,9 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Time.time > shooterSpawnTime + lastShooterSpawned)
+        if (sessionTime > shooterSpawnTime + lastShooterSpawned)
         {
-            lastShooterSpawned = Time.time;
+            lastShooterSpawned = sessionTime;
             if (playerPosition)
             {
                 Vector3 randomShooterPosition = RandomShooterPosition();
