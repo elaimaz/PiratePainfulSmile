@@ -13,7 +13,7 @@ public class EnemyChaser : MonoBehaviour, IDamageble
     [SerializeField]
     private int health = 2;
     [SerializeField]
-    private Text healthText;
+    private Text healthText = null;
 
     private GameManager gameManager;
 
