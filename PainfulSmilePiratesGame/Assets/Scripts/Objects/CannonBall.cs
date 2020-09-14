@@ -6,6 +6,9 @@ public class CannonBall : MonoBehaviour
     [SerializeField]
     private float speed = 0.8f;
 
+    [SerializeField]
+    private GameObject explosionAnimation = null;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -22,6 +25,7 @@ public class CannonBall : MonoBehaviour
         if (collision.tag == "EnemyShip")
         {
             collision.GetComponent<IDamageble>().Damage(1);
+            Instantiate(explosionAnimation, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

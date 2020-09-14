@@ -68,6 +68,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.8
+  explosionAnimation: {fileID: 4244219524061938937, guid: 1eb3e8e65374c3f4b939eedc4a0adb25,
+    type: 3}
 --- !u!58 &5857343129062823547
 CircleCollider2D:
   m_ObjectHideFlags: 0
