@@ -40,12 +40,15 @@ public class Player : MonoBehaviour, IDamageble
     private float lastDamageTime = 0;
     public bool canBeDamageble = true;
     [SerializeField]
-    private Text healthText;
+    private Text healthText = null;
+
+    private GameManager gameManager = null;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         healthText.text = health.ToString();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     private void Update()
@@ -108,6 +111,7 @@ public class Player : MonoBehaviour, IDamageble
 
     public void Death()
     {
+        gameManager.playerAlive = false;
         Destroy(gameObject);
     }
 }

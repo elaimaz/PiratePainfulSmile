@@ -13,7 +13,7 @@ public class EnemyShooter : MonoBehaviour, IDamageble
     [SerializeField]
     private int health = 3;
     [SerializeField]
-    private Text healthText;
+    private Text healthText = null;
 
     //Attack
     [SerializeField]
