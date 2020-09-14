@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyChaser : MonoBehaviour, IDamageble
 {
@@ -11,6 +12,8 @@ public class EnemyChaser : MonoBehaviour, IDamageble
 
     [SerializeField]
     private int health = 2;
+    [SerializeField]
+    private Text healthText;
 
     private GameManager gameManager;
 
@@ -19,6 +22,7 @@ public class EnemyChaser : MonoBehaviour, IDamageble
         rb = GetComponent<Rigidbody2D>();
         playerPosition = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        healthText.text = health.ToString();
     }
 
     private void Update()
@@ -40,6 +44,7 @@ public class EnemyChaser : MonoBehaviour, IDamageble
     public void Damage(int damageDone)
     {
         health -= damageDone;
+        healthText.text = health.ToString();
         if (health < 1)
             Death();
     }
