@@ -557,6 +557,10 @@ MonoBehaviour:
   cannonR: {fileID: 9062350670657357558}
   cannonL: {fileID: 9062350672065137968}
   distance: 0
+  shipSprites:
+  - {fileID: 21300000, guid: e8771ab3d9c841940ba4167a587a3e93, type: 3}
+  - {fileID: 21300000, guid: 44fc6e7d897e3eb4dae122d41f7afa6d, type: 3}
+  - {fileID: 21300000, guid: 434c88eb8deaf9c489ef8dc190f2c9fc, type: 3}
 --- !u!1 &9062350672065137969
 GameObject:
   m_ObjectHideFlags: 0

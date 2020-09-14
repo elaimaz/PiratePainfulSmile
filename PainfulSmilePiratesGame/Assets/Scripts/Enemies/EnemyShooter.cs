@@ -29,6 +29,11 @@ public class EnemyShooter : MonoBehaviour, IDamageble
 
     private GameManager gameManager;
 
+    [SerializeField]
+    private Sprite[] shipSprites = null;
+    private SpriteRenderer spriteRenderer;
+    private int MaxHealth;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -36,6 +41,9 @@ public class EnemyShooter : MonoBehaviour, IDamageble
         lastShoot = Time.time;
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         healthText.text = health.ToString();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        spriteRenderer.sprite = shipSprites[0];
+        MaxHealth = health;
     }
 
     private void Update()
@@ -74,8 +82,18 @@ public class EnemyShooter : MonoBehaviour, IDamageble
     {
         health -= damageDone;
         healthText.text = health.ToString();
+        ChangeSprite();
         if (health < 1)
             Death();
+    }
+
+    public void ChangeSprite()
+    {
+        int healthPercentage = Mathf.RoundToInt((float)health / MaxHealth * 100);
+        if (healthPercentage <= 67 && healthPercentage > 33)
+            spriteRenderer.sprite = shipSprites[1];
+        else if (healthPercentage <= 33)
+            spriteRenderer.sprite = shipSprites[2];
     }
 
     public void Death()
