@@ -4,16 +4,16 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour, IDamageble
 {
-    //Move Variables
     private Rigidbody2D rb;
     private float thrust = 0;
+    [Header("Move variables")]
     [SerializeField]
     private float shipSpeed = 1f;
     private float shipRotation = 0;
     [SerializeField]
     private float rotationRate = 30;
 
-    //Attack Variables
+    [Header("Attack variables")]
     [SerializeField]
     private float singleShotRate = 1f;
     private float lastSingleShotTime = 0;
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour, IDamageble
     [SerializeField]
     private GameObject rightCannon3 = null;
 
-    //Damage Varibles
+    [Header("Damage Variables")]
     [SerializeField]
     private int health = 7;
     [SerializeField]
@@ -45,6 +45,7 @@ public class Player : MonoBehaviour, IDamageble
 
     private GameManager gameManager = null;
 
+    [Header("VFX")]
     [SerializeField]
     private GameObject explosionDeath = null;
 

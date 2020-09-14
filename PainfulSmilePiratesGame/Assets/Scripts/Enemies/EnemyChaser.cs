@@ -8,6 +8,7 @@ public class EnemyChaser : MonoBehaviour, IDamageble
     private Vector3 direction;
     private float angle;
 
+    [Header("Enemy Health")]
     [SerializeField]
     private int health = 2;
     [SerializeField]
@@ -15,6 +16,7 @@ public class EnemyChaser : MonoBehaviour, IDamageble
 
     private GameManager gameManager;
 
+    [Header("VFX")]
     [SerializeField]
     private Sprite[] shipSprites = null;
     private SpriteRenderer spriteRenderer;

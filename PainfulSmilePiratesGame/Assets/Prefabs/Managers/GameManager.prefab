@@ -46,11 +46,15 @@ MonoBehaviour:
   chaserSpawnTime: 8
   chaserShip: {fileID: 9058020694183077770, guid: 1a9f955a2e0753940a799f82e1639b2b,
     type: 3}
+  maxChaserSpawnPos: 15
+  minChaserSpawnPos: 9
   shooterSpawnTime: 12
   shooterShip: {fileID: 9062350671148764761, guid: 47c0291961a6c9e49a1fc8ca97794163,
     type: 3}
-  playerPosition: {fileID: 0}
+  maxShooterSpawnPos: 6
+  minShooterSpawnPos: 4
   unspawnableArea:
     serializedVersion: 2
     m_Bits: 256
   duration: 1
+  playerAlive: 1
