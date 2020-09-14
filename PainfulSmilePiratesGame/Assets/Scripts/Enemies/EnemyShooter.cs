@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyShooter : MonoBehaviour, IDamageble
 {
@@ -11,6 +12,8 @@ public class EnemyShooter : MonoBehaviour, IDamageble
     //Health
     [SerializeField]
     private int health = 3;
+    [SerializeField]
+    private Text healthText;
 
     //Attack
     [SerializeField]
@@ -32,6 +35,7 @@ public class EnemyShooter : MonoBehaviour, IDamageble
         playerPosition = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         lastShoot = Time.time;
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        healthText.text = health.ToString();
     }
 
     private void Update()
@@ -69,6 +73,7 @@ public class EnemyShooter : MonoBehaviour, IDamageble
     public void Damage(int damageDone)
     {
         health -= damageDone;
+        healthText.text = health.ToString();
         if (health < 1)
             Death();
     }

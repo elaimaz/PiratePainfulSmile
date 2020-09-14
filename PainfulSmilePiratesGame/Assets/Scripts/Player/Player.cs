@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour, IDamageble
 {
@@ -37,12 +38,14 @@ public class Player : MonoBehaviour, IDamageble
     [SerializeField]
     private float damageRate = 1.5f;
     private float lastDamageTime = 0;
-    
     public bool canBeDamageble = true;
+    [SerializeField]
+    private Text healthText;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        healthText.text = health.ToString();
     }
 
     private void Update()
@@ -97,6 +100,7 @@ public class Player : MonoBehaviour, IDamageble
         {
             lastDamageTime = Time.time;
             health -= damageDone;
+            healthText.text = health.ToString();
             if (health < 1)
                 Death();
         }
