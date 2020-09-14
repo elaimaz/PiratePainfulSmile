@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour, IDamageble
@@ -43,6 +44,12 @@ public class Player : MonoBehaviour, IDamageble
     private Text healthText = null;
 
     private GameManager gameManager = null;
+
+    [SerializeField]
+    private GameObject explosionDeath = null;
+
+    [SerializeField]
+    private GameObject[] shipSpritesToBeHidden = null;
 
     private void Start()
     {
@@ -111,6 +118,17 @@ public class Player : MonoBehaviour, IDamageble
 
     public void Death()
     {
+        for (int i = 0; i < shipSpritesToBeHidden.Length; i++)
+        {
+            shipSpritesToBeHidden[i].SetActive(false);
+        }
+        StartCoroutine(WaitDeathAnimation());
+        Instantiate(explosionDeath, transform.position, Quaternion.identity);
+    }
+
+    private IEnumerator WaitDeathAnimation()
+    {
+        yield return new WaitForSeconds(2);
         gameManager.playerAlive = false;
         Destroy(gameObject);
     }

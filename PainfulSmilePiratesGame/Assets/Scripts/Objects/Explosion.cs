@@ -3,7 +3,7 @@
 public class Explosion : MonoBehaviour
 {
     [SerializeField]
-    private Sprite[] explosionSprites;
+    private Sprite[] explosionSprites = null;
     private int currentIndex = 0;
     private float timer;
     [SerializeField]
@@ -17,10 +17,11 @@ public class Explosion : MonoBehaviour
         if (timer >= animationRate && runAnimation != false)
         {
             timer -= animationRate;
-            GetComponentInChildren<SpriteRenderer>().sprite = explosionSprites[currentIndex];
-            currentIndex = (currentIndex + 1);
+            currentIndex++;
             if (currentIndex >= explosionSprites.Length)
                 runAnimation = false;
+            else
+                GetComponentInChildren<SpriteRenderer>().sprite = explosionSprites[currentIndex];
         }
         else if (timer >= animationRate && runAnimation == false)
         {

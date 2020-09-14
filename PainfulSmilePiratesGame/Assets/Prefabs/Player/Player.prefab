@@ -798,6 +798,14 @@ MonoBehaviour:
   damageRate: 1.5
   canBeDamageble: 1
   healthText: {fileID: 764079248}
+  explosionDeath: {fileID: 1714040074188682331, guid: 43015cbd397e9ca4db7cd31438a497ee,
+    type: 3}
+  shipSpritesToBeHidden:
+  - {fileID: 4613143252422559404}
+  - {fileID: 4613143251964466551}
+  - {fileID: 824281746}
+  - {fileID: 1921802704}
+  - {fileID: 519770111}
 --- !u!70 &2042703744
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
