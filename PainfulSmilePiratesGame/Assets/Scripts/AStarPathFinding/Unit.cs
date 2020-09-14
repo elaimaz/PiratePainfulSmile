@@ -2,8 +2,9 @@
 using System.Collections;
 
 public class Unit : MonoBehaviour {
-	
+	[Header("Player Reference")]
 	public Transform target;
+	[Header("Ship Speed")]
 	public float speed = 20;
 
 	Vector2[] path;

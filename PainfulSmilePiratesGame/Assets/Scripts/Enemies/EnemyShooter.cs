@@ -3,19 +3,18 @@ using UnityEngine.UI;
 
 public class EnemyShooter : MonoBehaviour, IDamageble
 {
-    //Rotation Move
     private Rigidbody2D rb;
     private Transform playerPosition;
     private Vector3 direction;
     private float angle;
 
-    //Health
+    [Header("Enemy Health")]
     [SerializeField]
     private int health = 3;
     [SerializeField]
     private Text healthText = null;
 
-    //Attack
+    [Header("Attack Attributes")]
     [SerializeField]
     private float ShootRate = 3f;
     private float lastShoot = 0;
@@ -29,6 +28,7 @@ public class EnemyShooter : MonoBehaviour, IDamageble
 
     private GameManager gameManager;
 
+    [Header("VFX")]
     [SerializeField]
     private Sprite[] shipSprites = null;
     private SpriteRenderer spriteRenderer;

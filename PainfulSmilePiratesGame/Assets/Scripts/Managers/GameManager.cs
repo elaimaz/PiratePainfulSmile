@@ -3,22 +3,33 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Chaser Enemy")]
     [SerializeField]
     private float chaserSpawnTime = 8;
     private float lastChaserSpawned = 0;
     [SerializeField]
     private GameObject chaserShip = null;
     [SerializeField]
+    private float maxChaserSpawnPos = 15;
+    [SerializeField]
+    private float minChaserSpawnPos = 9;
+    [Header("Shooter Enemy")]
+    [SerializeField]
     private float shooterSpawnTime = 2;
     private float lastShooterSpawned = 0;
     [SerializeField]
     private GameObject shooterShip = null;
-    private float sessionTime;
     [SerializeField]
+    private float maxShooterSpawnPos = 8;
+    [SerializeField]
+    private float minShooterSpawnPos = 4;
+    private float sessionTime;
+    [Header("Player Reference")]
     private Transform playerPosition;
+    [Header("Unspanawble Area")]
     [SerializeField]
     private LayerMask unspawnableArea = 0;
-
+    [Header("Session Duration")]
     [SerializeField]
     private int duration = 3;
     private float time;
@@ -27,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     private int score = 0;
     private bool runGame = true;
+    [HideInInspector]
     public bool playerAlive = true;
 
     private void Start()
@@ -82,17 +94,17 @@ public class GameManager : MonoBehaviour
 
     private Vector3 RandomChaserPosition()
     {
-        Vector3 randomPosition = new Vector3(Random.Range(playerPosition.transform.position.x - 15, playerPosition.transform.position.x + 15), Random.Range(playerPosition.transform.position.y - 10, playerPosition.transform.position.y + 10), 0);
-        if (randomPosition.x > playerPosition.transform.position.x - 9f || randomPosition.x < playerPosition.transform.position.x + 9f)
+        Vector3 randomPosition = new Vector3(Random.Range(playerPosition.transform.position.x - maxChaserSpawnPos, playerPosition.transform.position.x + maxChaserSpawnPos), Random.Range(playerPosition.transform.position.y - maxChaserSpawnPos, playerPosition.transform.position.y + maxChaserSpawnPos), 0);
+        if (randomPosition.x > playerPosition.transform.position.x - minChaserSpawnPos || randomPosition.x < playerPosition.transform.position.x + minChaserSpawnPos)
             if (randomPosition.x >= playerPosition.transform.position.x)
-                randomPosition.x += 9f;
+                randomPosition.x += minChaserSpawnPos;
             else
-                randomPosition.x -= 9f;
-        if (randomPosition.y > playerPosition.transform.position.y - 5.5f || randomPosition.y < playerPosition.transform.position.y + 5.5f)
+                randomPosition.x -= minChaserSpawnPos;
+        if (randomPosition.y > playerPosition.transform.position.y - minChaserSpawnPos || randomPosition.y < playerPosition.transform.position.y + minChaserSpawnPos)
             if (randomPosition.y >= playerPosition.transform.position.y)
-                randomPosition.y += 5.5f;
+                randomPosition.y += minChaserSpawnPos;
             else
-                randomPosition.y -= 5.5f;
+                randomPosition.y -= minChaserSpawnPos;
         if (Physics2D.OverlapCircle(randomPosition, 1, unspawnableArea) != null)
             randomPosition = RandomShooterPosition();
 
@@ -101,17 +113,17 @@ public class GameManager : MonoBehaviour
 
     private Vector3 RandomShooterPosition()
     {
-        Vector3 randomPosition = new Vector3(Random.Range(playerPosition.transform.position.x - 8, playerPosition.transform.position.x + 8), Random.Range(playerPosition.transform.position.y - 4, playerPosition.transform.position.y + 4), 0);
-        if (randomPosition.x > playerPosition.transform.position.x - 3 || randomPosition.x < playerPosition.transform.position.x + 3)
+        Vector3 randomPosition = new Vector3(Random.Range(playerPosition.transform.position.x - maxShooterSpawnPos, playerPosition.transform.position.x + maxShooterSpawnPos), Random.Range(playerPosition.transform.position.y - minShooterSpawnPos, playerPosition.transform.position.y + minShooterSpawnPos), 0);
+        if (randomPosition.x > playerPosition.transform.position.x - minShooterSpawnPos || randomPosition.x < playerPosition.transform.position.x + minShooterSpawnPos)
             if (randomPosition.x >= playerPosition.transform.position.x)
                 randomPosition.x += 2;
             else
                 randomPosition.x -= 2;
-        if (randomPosition.y > playerPosition.transform.position.y - 2 || randomPosition.y < playerPosition.transform.position.y + 2)
+        if (randomPosition.y > playerPosition.transform.position.y - minShooterSpawnPos || randomPosition.y < playerPosition.transform.position.y + minShooterSpawnPos)
             if (randomPosition.y >= playerPosition.transform.position.y)
-                randomPosition.y += 1;
+                randomPosition.y += 2;
             else
-                randomPosition.y -= 1;
+                randomPosition.y -= 2;
         if (Physics2D.OverlapCircle(randomPosition, 1, unspawnableArea) != null)
             randomPosition = RandomShooterPosition();
 
